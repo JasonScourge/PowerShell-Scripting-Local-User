@@ -10,4 +10,5 @@ Set-ExecutionPolicy RemoteSigned
 `
 - Type **A** and press Enter (if applicable).
 - Find the path to your script and press Enter
-Abridged from: https://www.windowscentral.com/how-create-and-run-your-first-powershell-script-file-windows-10
+
+<sub><sup>*Abridged from: https://www.windowscentral.com/how-create-and-run-your-first-powershell-script-file-windows-10*</sup></sub>
