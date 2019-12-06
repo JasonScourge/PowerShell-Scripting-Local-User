@@ -33,6 +33,25 @@ if($Command -eq "Create") {
     }
 }
 
+# Removing the user
+if($Command -eq "Remove") { 
+    [string]$ObjectName = Read-Host -Prompt "Enter the username for the user account to be removed"
+
+    foreach($Computer in $ComputerName) {
+        if(Test-Connection -ComputerName $Computer -count 1 -Quiet) {
+            try {
+                Remove-LocalUser -Name $ObjectName
+                Write-Host "Removed the user account: $ObjectName" -ForegroundColor Green
+            } catch {
+                Write-Warning "Error occurred while removing the user"
+                Write-Verbose "More details : $_"
+            }    
+        } else {
+                Write-Warning "$Computer is not online or avaliable"
+        }
+    }
+}
+
 
 # Quitting the script
 if($Command -eq "Quit") {   
