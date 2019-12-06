@@ -52,6 +52,25 @@ if($Command -eq "Remove") {
     }
 }
 
+# Renaming the user
+if($Command -eq "Rename") { 
+    [string]$CurrentUsername = Read-Host -Prompt "Enter the username for the user account to be renamed"
+    [string]$NewUsername = Read-Host -Prompt "Enter the new username"
+
+    foreach($Computer in $ComputerName) {
+        if(Test-Connection -ComputerName $Computer -count 1 -Quiet) {
+            try {
+                Rename-LocalUser -Name $CurrentUsername -NewName $NewUsername
+                Write-Host "Renamed the user account $CurrentUsername to $NewUsername" -ForegroundColor Green
+            } catch {
+                Write-Warning "Error occurred while renaming the user"
+                Write-Verbose "More details : $_"
+            }    
+        } else {
+                Write-Warning "$Computer is not online or avaliable"
+        }
+    }
+}
 
 # Quitting the script
 if($Command -eq "Quit") {   
